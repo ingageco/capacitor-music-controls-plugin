@@ -29,7 +29,7 @@ public class MusicControlsInfos{
 		
 		this.track = params.getString("track");
 		this.artist = params.getString("artist");
-    		this.album = params.getString("album");
+    	this.album = params.getString("album");
 		this.ticker = params.getString("ticker");
 		this.cover = params.getString("cover");
 		this.isPlaying = params.getBoolean("isPlaying");

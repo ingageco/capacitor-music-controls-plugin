@@ -1,6 +1,6 @@
 # Capacitor Music Controls Plugin
 
-An update to Cordova Music Controls plugin to support Capacitor
+An update to Cordova Music Controls plugin to support Capacitor 3
 
 Music controls for Capacitor applications. Display a 'media' notification with play/pause, previous, next buttons, allowing the user to control the play. Handles headset events (plug, unplug, headset button) on Android.
 
@@ -90,7 +90,12 @@ CapacitorMusicControls.create({
 	nextIcon: 'media_next',
 	closeIcon: 'media_close',
 	notificationIcon: 'notification'
-}, onSuccess, onError);
+}).then(()=>{
+	// TODO
+})
+.catch(e=>{
+	console.log(e);
+});
 ```
 
 - Update whether the music is playing true/false, as well as the time elapsed (seconds)
@@ -99,6 +104,11 @@ CapacitorMusicControls.create({
 CapacitorMusicControls.updateIsPlaying({
     isPlaying: true, // affects Android only
     elapsed: timeElapsed // affects iOS Only
+}).then(()=>{
+	// TODO
+})
+.catch(e=>{
+	console.log(e);
 });
 ```
 
@@ -117,7 +127,7 @@ CapacitorMusicControls.addListener('controlsNotification', (info: any) => {
 - Example event handler
 
 ```javascript
-handleControlsEvent(action){
+function handleControlsEvent(action) {
 
 	console.log("hello from handleControlsEvent")
 	const message = action.message;
@@ -145,7 +155,7 @@ handleControlsEvent(action){
 		case 'music-controls-toggle-play-pause' :
 			// do something
 			break;
-		case 'music-controls-seek-to':
+		case 'music-controls-skip-to':
 			// do something
 			break;
 		case 'music-controls-skip-forward':

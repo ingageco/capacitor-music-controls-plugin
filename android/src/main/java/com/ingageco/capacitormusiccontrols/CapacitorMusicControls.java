@@ -1,7 +1,7 @@
 package com.ingageco.capacitormusiccontrols;
 
 import com.getcapacitor.JSObject;
-import com.getcapacitor.NativePlugin;
+import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -42,7 +42,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@NativePlugin()
+@CapacitorPlugin(name = "CapacitorMusicControls")
 public class CapacitorMusicControls extends Plugin {
 
 	private static final String TAG = "CapacitorMusicControls";
@@ -102,10 +102,10 @@ public class CapacitorMusicControls extends Plugin {
 			else
 				setMediaPlaybackState(PlaybackStateCompat.STATE_PAUSED);
 
-			call.success();
+			call.resolve();
 
 		}catch(JSONException e){
-			call.reject("error in initializing MusicControlsInfos");
+			call.reject("error in initializing MusicControlsInfos "+e.toString());
 
 		}
 
@@ -160,6 +160,8 @@ public class CapacitorMusicControls extends Plugin {
 			public void onServiceConnected(ComponentName className, IBinder binder) {
 				Log.i(TAG, "onServiceConnected");
 				final CMCNotifyKiller service = (CMCNotifyKiller) ((KillBinder) binder).service;
+
+				service.setActivity(activity).setConnection(this).setBounded(true);
 				my_notification.setKillerService(service);
 				service.startService(new Intent(activity, CMCNotifyKiller.class));
 				Log.i(TAG, "service Started");
@@ -185,7 +187,9 @@ public class CapacitorMusicControls extends Plugin {
 		final Activity activity = getActivity();
 		final Context context=activity.getApplicationContext();
 
-		notification.destroy();
+		if(notification != null) {
+			notification.destroy();
+		}
 		// mMessageReceiver.stopListening();
 
 		try{
@@ -206,7 +210,7 @@ public class CapacitorMusicControls extends Plugin {
 			activity.stopService(stopServiceIntent);
 			mConnection = null;
 		}
-		call.success();
+		call.resolve();
 	}
 
 
@@ -227,7 +231,7 @@ public class CapacitorMusicControls extends Plugin {
 			else
 				setMediaPlaybackState(PlaybackStateCompat.STATE_PAUSED);
 
-			call.success();
+			call.resolve();
 		} catch(JSONException e){
 			System.out.println("toString(): "  + e.toString());
 			System.out.println("getMessage(): " + e.getMessage());
@@ -254,7 +258,7 @@ public class CapacitorMusicControls extends Plugin {
 			else
 				setMediaPlaybackState(PlaybackStateCompat.STATE_PAUSED);
 
-			call.success();
+			call.resolve();
 		} catch(JSONException e){
 			call.reject("error in updateElapsed");
 		}
@@ -268,7 +272,7 @@ public class CapacitorMusicControls extends Plugin {
 		try{
 			final boolean dismissable = params.getBoolean("dismissable");
 			this.notification.updateDismissable(dismissable);
-		call.success();
+		call.resolve();
 		} catch(JSONException e){
 			call.reject("error in updateDismissable");
 		}

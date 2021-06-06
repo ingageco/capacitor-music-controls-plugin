@@ -72,7 +72,7 @@ public class CapacitorMusicControls: CAPPlugin {
             
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
 
-        call.success();
+        call.resolve();
         
     }
     
@@ -96,7 +96,7 @@ public class CapacitorMusicControls: CAPPlugin {
         
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
 
-        call.success();
+        call.resolve();
 
     }
     
@@ -110,14 +110,14 @@ public class CapacitorMusicControls: CAPPlugin {
     @objc func listen(_ call: CAPPluginCall) {
             self.registerMusicControlsEventListener();
             
-            call.success();
+            call.resolve();
    }
        
     
     @objc func destroy(_ call: CAPPluginCall) {
         self.deregisterMusicControlsEventListener();
         
-        call.success();
+        call.resolve();
            
     }
  

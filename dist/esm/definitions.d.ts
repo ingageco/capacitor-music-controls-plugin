@@ -1,8 +1,4 @@
-declare global {
-    interface PluginRegistry {
-        CapacitorMusicControls?: CapacitorMusicControls;
-    }
-}
+import { PluginListenerHandle } from "@capacitor/core";
 export interface CapacitorMusicControlsInfo {
     track?: string;
     artist?: string;
@@ -28,12 +24,12 @@ export interface CapacitorMusicControlsInfo {
     closeIcon?: string;
     notificationIcon?: string;
 }
-export interface CapacitorMusicControls {
+export interface CapacitorMusicControlsPlugin {
     /**
-       * Create the media controls
-       * @param options {MusicControlsOptions}
-       * @returns {Promise<any>}
-       */
+     * Create the media controls
+     * @param options {MusicControlsOptions}
+     * @returns {Promise<any>}
+     */
     create(options: CapacitorMusicControlsInfo): Promise<any>;
     /**
      * Destroy the media controller
@@ -54,7 +50,7 @@ export interface CapacitorMusicControls {
      * @param args {Object}
      */
     updateElapsed(args: {
-        elapsed: string;
+        elapsed: number;
         isPlaying: boolean;
     }): void;
     /**
@@ -62,4 +58,5 @@ export interface CapacitorMusicControls {
      * @param dismissable {boolean}
      */
     updateDismissable(dismissable: boolean): void;
+    addListener(event: string, callback: (info: any) => void): PluginListenerHandle;
 }

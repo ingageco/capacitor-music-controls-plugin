@@ -2,7 +2,9 @@ package com.ingageco.capacitormusiccontrols;
 
 import java.lang.ref.WeakReference;
 
+import android.app.Activity;
 import android.app.Service;
+import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.Binder;
 import android.os.PowerManager;
@@ -27,6 +29,25 @@ public class CMCNotifyKiller extends Service {
 
 	private boolean foregroundStarted = false;
 
+
+	private Activity activity;
+	private ServiceConnection connection;
+	private boolean bounded;
+
+	public CMCNotifyKiller setActivity(Activity activity) {
+		this.activity = activity;
+		return this;
+	}
+
+	public CMCNotifyKiller setConnection(ServiceConnection connection) {
+		this.connection = connection;
+		return this;
+	}
+
+	public CMCNotifyKiller setBounded(boolean bounded) {
+		this.bounded = bounded;
+		return this;
+	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -130,5 +151,14 @@ public class CMCNotifyKiller extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		sleepWell(true);
+	}
+
+	@Override
+	public void onTaskRemoved(Intent rootIntent) {
+		super.onTaskRemoved(rootIntent);
+		sleepWell(true);
+		if(bounded) {
+			activity.unbindService(connection);
+		}
 	}
 }
