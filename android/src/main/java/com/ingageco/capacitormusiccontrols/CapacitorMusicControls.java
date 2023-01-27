@@ -258,7 +258,7 @@ public class CapacitorMusicControls extends Plugin {
 			call.reject("error in updateElapsed");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-		}			}
+		}
 
 	}
 
