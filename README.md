@@ -1,4 +1,4 @@
-# Capacitor Music Controls Plugin
+# Capacitor 2 Music Controls Plugin
 
 An update to Cordova Music Controls plugin to support Capacitor 2. A Capacitor 3 version can be found here (thanks to JumBay):
 https://github.com/ingageco/capacitor-music-controls-plugin-v3
