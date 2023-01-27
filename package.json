@@ -1,6 +1,6 @@
 {
   "name": "capacitor-music-controls-plugin-v3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Implementation of MusicControls for Capacitor 3 projects",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -25,7 +25,7 @@
     "dist/",
     "ios/",
     "android/",
-    "CapacitorMusicControlsPlugin.podspec"
+    "CapacitorMusicControlsPluginV3.podspec"
   ],
   "keywords": [
     "capacitor",
