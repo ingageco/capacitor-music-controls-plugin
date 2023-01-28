@@ -276,13 +276,9 @@ public class CapacitorMusicControls extends Plugin {
 
 	}
 
-
-
-
 	public void controlsNotification(JSObject ret){
 
 		Log.i(TAG, "controlsNotification fired "  + ret.getString("message"));
-
 		notifyListeners("controlsNotification", ret);
 
   }
