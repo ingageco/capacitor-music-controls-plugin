@@ -228,11 +228,11 @@ public class CapacitorMusicControls extends Plugin {
 
 			call.resolve();
 		} catch(JSONException e){
-			System.out.println("toString(): "  + e.toString());
-			System.out.println("getMessage(): " + e.getMessage());
-			System.out.println("StackTrace: ");
-			e.printStackTrace();
-			call.reject("error in updateIsPlaying");
+			// System.out.println("toString(): "  + e.toString());
+			// System.out.println("getMessage(): " + e.getMessage());
+			// System.out.println("StackTrace: ");
+			// e.printStackTrace();
+			call.reject("error updateIsPlaying: "+e.toString());
 		}
 
 
@@ -255,7 +255,7 @@ public class CapacitorMusicControls extends Plugin {
 
 			call.resolve();
 		} catch(JSONException e){
-			call.reject("error in updateElapsed");
+			call.reject("error updateElapsed: "+e.toString());
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
@@ -271,7 +271,7 @@ public class CapacitorMusicControls extends Plugin {
 			this.notification.updateDismissable(dismissable);
 		call.resolve();
 		} catch(JSONException e){
-			call.reject("error in updateDismissable");
+			call.reject("error updateDismissable: "+e.toString());
 		}
 
 	}
@@ -285,7 +285,7 @@ public class CapacitorMusicControls extends Plugin {
 
 		notifyListeners("controlsNotification", ret);
 
-    }
+  }
 
 
 	private void registerBroadcaster(MusicControlsBroadcastReceiver mMessageReceiver){
