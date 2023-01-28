@@ -216,7 +216,7 @@ public class CapacitorMusicControls extends Plugin {
 	public void updateIsPlaying(PluginCall call) {
 		JSObject params = call.getData();
 
-		if (!this.hasNotification()) {
+		if (!this.notification) {
 			call.resolve();
 			return;
 		}
