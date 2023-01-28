@@ -216,7 +216,11 @@ public class CapacitorMusicControls extends Plugin {
 	public void updateIsPlaying(PluginCall call) {
 		JSObject params = call.getData();
 
-		// final JSONObject params = args.getJSONObject(0);
+		if (!this.hasNotification()) {
+			call.resolve();
+			return;
+		}
+
 		try{
 			final boolean isPlaying = params.getBoolean("isPlaying");
 			this.notification.updateIsPlaying(isPlaying);
@@ -228,14 +232,8 @@ public class CapacitorMusicControls extends Plugin {
 
 			call.resolve();
 		} catch(JSONException e){
-			// System.out.println("toString(): "  + e.toString());
-			// System.out.println("getMessage(): " + e.getMessage());
-			// System.out.println("StackTrace: ");
-			// e.printStackTrace();
 			call.reject("error updateIsPlaying: "+e.toString());
 		}
-
-
 
 	}
 

@@ -175,17 +175,13 @@ public class MusicControlsBroadcastReceiver extends BroadcastReceiver {
 				}
 			} else if (message.equals("music-controls-destroy")){
 				// Close Button
-			ret.put("message", "music-controls-destroy");
-
-			this.musicControls.controlsNotification(ret);
-//				this.cb.success("{\"message\": \"music-controls-destroy\"}");
-//				this.cb = null;
+				ret.put("message", "music-controls-destroy");
+				this.musicControls.controlsNotification(ret);
 				this.musicControls.destroyPlayerNotification();
+				
 			} else {
-			ret.put("message", message);
-			this.musicControls.controlsNotification(ret);
-//				this.cb.success("{\"message\": \"" + message + "\"}");
-//				this.cb = null;
+				ret.put("message", message);
+				this.musicControls.controlsNotification(ret);
 			}
 
 
