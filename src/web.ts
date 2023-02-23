@@ -27,8 +27,8 @@ export class CapacitorMusicControlsWeb extends WebPlugin implements CapacitorMus
         console.log('updateElapsed', args);
     }
 
-    updateIsPlaying(isPlaying: boolean): void {
-        console.log('updateIsPlaying', isPlaying);
+    updateIsPlaying(args: { elapsed: number; isPlaying: boolean }): void {
+        console.log('updateIsPlaying', args);
     }
 
 }

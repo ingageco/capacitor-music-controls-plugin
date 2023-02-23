@@ -195,6 +195,7 @@ public class MusicControlsNotification {
 		if (!this.infos.artist.isEmpty()){
 			builder.setContentText(this.infos.artist);
 		}
+		
 		builder.setWhen(0);
 
 		// set if the notification can be destroyed by swiping
@@ -206,7 +207,8 @@ public class MusicControlsNotification {
 		} else {
 			builder.setOngoing(true);
 		}
-		if (!this.infos.ticker.isEmpty()){
+
+		if (this.infos.ticker != null && !this.infos.ticker.isEmpty()){
 			builder.setTicker(this.infos.ticker);
 		}
 		
@@ -232,19 +234,19 @@ public class MusicControlsNotification {
 			}
 		}
 
-		//Set LargeIcon
+		// Set LargeIcon
 		if (!this.infos.cover.isEmpty() && this.bitmapCover != null){
 			builder.setLargeIcon(this.bitmapCover);
 		}
 
-		//Open app if tapped
+		// Open app if tapped
 		Intent resultIntent = new Intent(context, cordovaActivity.getClass());
 		resultIntent.setAction(Intent.ACTION_MAIN);
 		resultIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_MUTABLE);
 		builder.setContentIntent(resultPendingIntent);
 
-		//Controls
+		// Controls
 		int nbControls=0;
 		/* Previous  */
 		if (this.infos.hasPrev){

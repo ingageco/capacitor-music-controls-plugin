@@ -37,14 +37,12 @@ export interface CapacitorMusicControlsPlugin {
      */
     destroy(): Promise<any>;
     /**
-     * Subscribe to the events of the media controller
-     * @returns {Observable<any>}
-     */
-    /**
      * Toggle play/pause:
-     * @param isPlaying {boolean}
+     * @param isPlaying {Object}
      */
-    updateIsPlaying(isPlaying: boolean): void;
+    updateIsPlaying(args: {
+        isPlaying: boolean;
+    }): void;
     /**
      * Update elapsed time, optionally toggle play/pause:
      * @param args {Object}
