@@ -53,8 +53,6 @@ npx cap sync android
 
 ## Importing the Plugin
 
-At the top of your file import Capacitor Plugins and this extract this plugin
-
 ```javascript
 import { CapacitorMusicControls } from 'capacitor-music-controls-plugin-v3'
 ```
