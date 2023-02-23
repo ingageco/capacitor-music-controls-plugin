@@ -2,6 +2,9 @@
 
 An update to Cordova Music Controls plugin to support Capacitor V3
 
+If you are looking to support Capacitor V2:
+https://github.com/ingageco/capacitor-music-controls-plugin
+
 ## Update Credit
 
 All credit to JumBay for doing the leg work in a fork to get this working on Capacitor 3. 
@@ -9,10 +12,7 @@ https://github.com/wako-app/capacitor-music-controls-plugin
 
 ## About
 
-If you are looking to support Capacitor V2:
-https://github.com/ingageco/capacitor-music-controls-plugin
-
-Music controls for Capacitor applications. Display a 'media' notification with play/pause, previous, next buttons, allowing the user to control the play. Handles headset events (plug, unplug, headset button) on Android.
+Music controls for Capacitor v3 applications. Display a 'media' notification with play/pause, previous, next buttons, allowing the user to control the play. Handles headset events (plug, unplug, headset button) on Android.
 
 This plugin is forked from the original Cordova plugin which is no longer maintained but which can be found at:
 https://github.com/homerours/cordova-music-controls-plugin
@@ -51,14 +51,12 @@ add(CapacitorMusicControls.class);
 Finally, run:
 npx cap sync android
 
-
 ## Importing the Plugin
 
 At the top of your file import Capacitor Plugins and this extract this plugin
 
 ```javascript
-import { Plugins } from '@capacitor/core';
-const { CapacitorMusicControls } = Plugins;
+import { CapacitorMusicControls } from 'capacitor-music-controls-plugin-v3'
 ```
 
 ## Methods
@@ -66,12 +64,13 @@ const { CapacitorMusicControls } = Plugins;
 - Create the media controls:
 ```javascript
 CapacitorMusicControls.create({
-	track       : 'Time is Running Out',		// optional, default : ''
-	artist      : 'Muse',						// optional, default : ''
-	album       : 'Absolution',     // optional, default: ''
- 	cover       : 'albums/absolution.jpg',		// optional, default : nothing
-	// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
-	//			 or a remote url ('http://...', 'https://...', 'ftp://...')
+	track       : 'Time is Running Out', // optional, default : ''
+	artist      : 'Muse', // optional, default : ''
+	album       : 'Absolution', // optional, default: ''
+ 	cover       : 'albums/absolution.jpg', // optional, default : nothing
+	// cover can be a local path (use fullpath 'file:///storage/emulated/...', 
+	// or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+	// or a remote url ('http://...', 'https://...', 'ftp://...')
 
 	// hide previous/next/close buttons:
 	hasPrev   : false,		// show previous button, optional, default: true
@@ -81,19 +80,19 @@ CapacitorMusicControls.create({
 	// iOS only, optional
 	duration : 60, // optional, default: 0
 	elapsed : 10, // optional, default: 0
-  	hasSkipForward : true, //optional, default: false. true value overrides hasNext.
-  	hasSkipBackward : true, //optional, default: false. true value overrides hasPrev.
-  	skipForwardInterval : 15, //optional. default: 15.
+	hasSkipForward : true, //optional, default: false. true value overrides hasNext.
+	hasSkipBackward : true, //optional, default: false. true value overrides hasPrev.
+	skipForwardInterval : 15, //optional. default: 15.
 	skipBackwardInterval : 15, //optional. default: 15.
 	hasScrubbing : false, //optional. default to false. Enable scrubbing from control center progress bar 
 
-    // Android only, optional
-    isPlaying   : true,							// optional, default : true
-    dismissable : true,							// optional, default : false
-	// text displayed in the status bar when the notification (and the ticker) are updated
+	// Android only, optional
+	isPlaying   : true, // optional, default : true
+	dismissable : true, // optional, default : false
+	// optional, text displayed in the status bar when the notification (and the ticker) are updated
 	ticker	  : 'Now playing "Time is Running Out"',
-	//All icons default to their built-in android equivalents
-	//The supplied drawable name, e.g. 'media_play', is the name of a drawable found under android/res/drawable* folders
+	// All icons default to their built-in android equivalents
+	// The supplied drawable name, e.g. 'media_play', is the name of a drawable found under android/res/drawable* folders
 	playIcon: 'media_play',
 	pauseIcon: 'media_pause',
 	prevIcon: 'media_prev',
