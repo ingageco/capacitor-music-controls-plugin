@@ -62,41 +62,41 @@ import { CapacitorMusicControls } from 'capacitor-music-controls-plugin-v3'
 - Create the media controls:
 ```javascript
 CapacitorMusicControls.create({
-	track       : 'Time is Running Out', // optional, default : ''
-	artist      : 'Muse', // optional, default : ''
-	album       : 'Absolution', // optional, default: ''
- 	cover       : 'albums/absolution.jpg', // optional, default : nothing
-	// cover can be a local path (use fullpath 'file:///storage/emulated/...', 
-	// or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
-	// or a remote url ('http://...', 'https://...', 'ftp://...')
+  track       : 'Time is Running Out', // optional, default : ''
+  artist      : 'Muse', // optional, default : ''
+  album       : 'Absolution', // optional, default: ''
+  cover       : 'albums/absolution.jpg', // optional, default : nothing
+  // cover can be a local path (use fullpath 'file:///storage/emulated/...', 
+  // or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+  // or a remote url ('http://...', 'https://...', 'ftp://...')
 
-	// hide previous/next/close buttons:
-	hasPrev   : false,		// show previous button, optional, default: true
-	hasNext   : false,		// show next button, optional, default: true
-	hasClose  : true,		// show close button, optional, default: false
+  // hide previous/next/close buttons:
+  hasPrev   : false, // show previous button, optional, default: true
+  hasNext   : false, // show next button, optional, default: true
+  hasClose  : true, // show close button, optional, default: false
 
-	// iOS only, all optional
-	duration : 60, // default: 0
-	elapsed : 10, // default: 0
-	hasSkipForward : true, // default: false. true value overrides hasNext.
-	hasSkipBackward : true, // default: false. true value overrides hasPrev.
-	skipForwardInterval : 15, // default: 15.
-	skipBackwardInterval : 15, // default: 15.
-	hasScrubbing : false, // default: false. Enable scrubbing from control center progress bar 
+  // iOS only, all optional
+  duration : 60, // default: 0
+  elapsed : 10, // default: 0
+  hasSkipForward : true, // default: false. true value overrides hasNext.
+  hasSkipBackward : true, // default: false. true value overrides hasPrev.
+  skipForwardInterval : 15, // default: 15.
+  skipBackwardInterval : 15, // default: 15.
+  hasScrubbing : false, // default: false. Enable scrubbing from control center progress bar 
 
-	// Android only, all optional
-	isPlaying   : true, // default : true
-	dismissable : true, // default : false
-	// text displayed in the status bar when the notification (and the ticker) are updated
-	ticker	  : 'Now playing "Time is Running Out"',
-	// All icons default to their built-in android equivalents
-	// The supplied drawable name, e.g. 'media_play', is the name of a drawable found under android/res/drawable* folders
-	playIcon: 'media_play',
-	pauseIcon: 'media_pause',
-	prevIcon: 'media_prev',
-	nextIcon: 'media_next',
-	closeIcon: 'media_close',
-	notificationIcon: 'notification'
+  // Android only, all optional
+  isPlaying   : true, // default : true
+  dismissable : true, // default : false
+  // text displayed in the status bar when the notification (and the ticker) are updated
+  ticker : 'Now playing "Time is Running Out"',
+  // All icons default to their built-in android equivalents
+  // The supplied drawable name, e.g. 'media_play', is the name of a drawable found under android/res/drawable* folders
+  playIcon: 'media_play',
+  pauseIcon: 'media_pause',
+  prevIcon: 'media_prev',
+  nextIcon: 'media_next',
+  closeIcon: 'media_close',
+  notificationIcon: 'notification'
 }).then(()=>{
 	// SUCCESS
 })
