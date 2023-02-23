@@ -75,19 +75,19 @@ CapacitorMusicControls.create({
 	hasNext   : false,		// show next button, optional, default: true
 	hasClose  : true,		// show close button, optional, default: false
 
-	// iOS only, optional
-	duration : 60, // optional, default: 0
-	elapsed : 10, // optional, default: 0
-	hasSkipForward : true, //optional, default: false. true value overrides hasNext.
-	hasSkipBackward : true, //optional, default: false. true value overrides hasPrev.
-	skipForwardInterval : 15, //optional. default: 15.
-	skipBackwardInterval : 15, //optional. default: 15.
-	hasScrubbing : false, //optional. default to false. Enable scrubbing from control center progress bar 
+	// iOS only, all optional
+	duration : 60, // default: 0
+	elapsed : 10, // default: 0
+	hasSkipForward : true, // default: false. true value overrides hasNext.
+	hasSkipBackward : true, // default: false. true value overrides hasPrev.
+	skipForwardInterval : 15, // default: 15.
+	skipBackwardInterval : 15, // default: 15.
+	hasScrubbing : false, // default: false. Enable scrubbing from control center progress bar 
 
-	// Android only, optional
-	isPlaying   : true, // optional, default : true
-	dismissable : true, // optional, default : false
-	// optional, text displayed in the status bar when the notification (and the ticker) are updated
+	// Android only, all optional
+	isPlaying   : true, // default : true
+	dismissable : true, // default : false
+	// text displayed in the status bar when the notification (and the ticker) are updated
 	ticker	  : 'Now playing "Time is Running Out"',
 	// All icons default to their built-in android equivalents
 	// The supplied drawable name, e.g. 'media_play', is the name of a drawable found under android/res/drawable* folders
