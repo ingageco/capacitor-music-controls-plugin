@@ -316,6 +316,7 @@ public class CapacitorMusicControls extends Plugin {
 	public void unregisterMediaButtonEvent(){
 		if (this.mediaSessionCompat != null) {
 			this.mediaSessionCompat.setMediaButtonReceiver(null);
+			this.mediaSessionCompat.release();
 		}
 	}
 
