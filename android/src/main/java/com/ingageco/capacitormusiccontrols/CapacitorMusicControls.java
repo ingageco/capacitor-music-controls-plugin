@@ -14,6 +14,8 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 
+import android.media.session.MediaSession.Token;
+
 import android.util.Log;
 import android.app.Activity;
 import android.app.Notification;
@@ -54,7 +56,8 @@ public class CapacitorMusicControls extends Plugin {
 	private AudioManager mAudioManager;
 	private PendingIntent mediaButtonPendingIntent;
 	private boolean mediaButtonAccess=true;
-	private ServiceConnection mConnection;
+	private android.media.session.MediaSession.Token token;
+	private MusicControlsServiceConnection mConnection;
 
 
 	private MediaSessionCallback mMediaSessionCallback;
@@ -118,17 +121,17 @@ public class CapacitorMusicControls extends Plugin {
 
 		final MusicControlsServiceConnection mConnection = new MusicControlsServiceConnection(activity);
 
-		this.notification = new MusicControlsNotification(activity, this.notificationID) {
-			@Override
-			protected void onNotificationUpdated(Notification notification) {
-				mConnection.setNotification(notification, this.infos.isPlaying);
-			}
+		// this.notification = new MusicControlsNotification(activity, this.notificationID) {
+		// 	@Override
+		// 	protected void onNotificationUpdated(Notification notification) {
+		// 		mConnection.setNotification(notification, this.infos.isPlaying);
+		// 	}
 
-			@Override
-			protected void onNotificationDestroyed() {
-				mConnection.setNotification(null, false);
-			}
-		};
+		// 	@Override
+		// 	protected void onNotificationDestroyed() {
+		// 		mConnection.setNotification(null, false);
+		// 	}
+		// };
 
 
 		// avoid spawning multiple receivers
@@ -155,12 +158,28 @@ public class CapacitorMusicControls extends Plugin {
 		mediaSessionCompat = new MediaSessionCompat(context, "capacitor-music-controls-media-session", null, mediaButtonPendingIntent);
 		mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
 
+		MediaSessionCompat.Token _token = this.mediaSessionCompat.getSessionToken();
+		this.token = (android.media.session.MediaSession.Token) _token.getToken();
+
 		setMediaPlaybackState(PlaybackStateCompat.STATE_PAUSED);
 		mediaSessionCompat.setActive(true);
 
 		mMediaSessionCallback = new MediaSessionCallback(this);
 
 		mediaSessionCompat.setCallback(mMediaSessionCallback);
+
+		this.notification = new MusicControlsNotification(activity, this.notificationID, this.token) {
+			@Override
+			protected void onNotificationUpdated(Notification notification) {
+				mConnection.setNotification(notification, this.infos.isPlaying);
+			}
+
+			@Override
+			protected void onNotificationDestroyed() {
+				mConnection.setNotification(null, false);
+			}
+		};
+
 
 		// Register media (headset) button event receiver
 		try {

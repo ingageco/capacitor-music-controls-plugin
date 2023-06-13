@@ -21,6 +21,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import android.media.session.MediaSession.Token;
+
 import android.app.NotificationChannel;
 
 public class MusicControlsNotification {
@@ -33,16 +35,18 @@ public class MusicControlsNotification {
 	protected MusicControlsInfos infos;
 	private Bitmap bitmapCover;
 	private String CHANNEL_ID;
+	private Token token;
 
 	public WeakReference<MusicControlsNotificationKiller> killer_service;
 
 	// Public Constructor
-	public MusicControlsNotification(Activity cordovaActivity, int id){
+	public MusicControlsNotification(Activity cordovaActivity, int id, Token token){
 
 
 		this.CHANNEL_ID ="capacitor-music-channel-id";
 		this.notificationID = id;
 		this.cordovaActivity = cordovaActivity;
+		this.token = token;
 		Context context = cordovaActivity.getApplicationContext();
 		this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -288,7 +292,7 @@ public class MusicControlsNotification {
 		for (int i = 0; i < nbControls; ++i) {
 			args[i] = i;
 		}
-		builder.setStyle(new Notification.MediaStyle().setShowActionsInCompactView(args));
+		builder.setStyle(new Notification.MediaStyle().setShowActionsInCompactView(args).setMediaSession(this.token));
 
 		this.notificationBuilder = builder;
 	}
