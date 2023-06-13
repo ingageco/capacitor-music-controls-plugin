@@ -16,7 +16,7 @@ import android.support.v4.media.session.PlaybackStateCompat;
 
 import android.util.Log;
 import android.app.Activity;
-
+import android.app.Notification;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -116,9 +116,19 @@ public class CapacitorMusicControls extends Plugin {
 
 		final Context context=activity.getApplicationContext();
 
-		notification = new MusicControlsNotification(activity, notificationID);
+		final MusicControlsServiceConnection mConnection = new MusicControlsServiceConnection(activity);
 
-		final MusicControlsNotification my_notification = notification;
+		this.notification = new MusicControlsNotification(activity, this.notificationID) {
+			@Override
+			protected void onNotificationUpdated(Notification notification) {
+				mConnection.setNotification(notification, this.infos.isPlaying);
+			}
+
+			@Override
+			protected void onNotificationDestroyed() {
+				mConnection.setNotification(null, false);
+			}
+		};
 
 
 		// avoid spawning multiple receivers
@@ -163,24 +173,7 @@ public class CapacitorMusicControls extends Plugin {
 			e.printStackTrace();
 		}
 
-
-		// Notification Killer
-		ServiceConnection newMConnection = new ServiceConnection() {
-			public void onServiceConnected(ComponentName className, IBinder binder) {
-				Log.i(TAG, "onServiceConnected");
-				final CMCNotifyKiller service = (CMCNotifyKiller) ((KillBinder) binder).service;
-				service.setActivity(activity).setConnection(this).setBounded(true);
-				my_notification.setKillerService(service);
-				service.startService(new Intent(activity, CMCNotifyKiller.class));
-				Log.i(TAG, "service Started");
-			}
-			public void onServiceDisconnected(ComponentName className) {
-				Log.i(TAG, "service Disconnected");
-			}
-		};
-
-
-		Intent startServiceIntent = new Intent(activity,CMCNotifyKiller.class);
+		Intent startServiceIntent = new Intent(activity,MusicControlsNotificationKiller.class);
 		startServiceIntent.putExtra("notificationID", notificationID);
 		activity.bindService(startServiceIntent, newMConnection, Context.BIND_AUTO_CREATE);
 
@@ -211,7 +204,7 @@ public class CapacitorMusicControls extends Plugin {
 		unregisterMediaButtonEvent();
 
 		if (mConnection != null) {
-			Intent stopServiceIntent = new Intent(activity, CMCNotifyKiller.class);
+			Intent stopServiceIntent = new Intent(activity, MusicControlsNotificationKiller.class);
 			activity.unbindService(mConnection);
 			activity.stopService(stopServiceIntent);
 			mConnection = null;

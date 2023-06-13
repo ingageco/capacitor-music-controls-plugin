@@ -1,12 +1,11 @@
 package com.ingageco.capacitormusiccontrols;
 
-import android.app.Service;
 import android.os.Binder;
 
 public class KillBinder extends Binder {
-	public final Service service;
+	public final MusicControlsNotificationKiller service;
 
-	public KillBinder(Service service) {
+	public KillBinder(MusicControlsNotificationKiller service) {
 		this.service = service;
 	}
 }

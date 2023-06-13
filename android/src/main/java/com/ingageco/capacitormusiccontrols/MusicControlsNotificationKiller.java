@@ -3,8 +3,10 @@ package com.ingageco.capacitormusiccontrols;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.Service;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Binder;
 import android.os.PowerManager;
@@ -15,8 +17,8 @@ import android.util.Log;
 
 import static android.os.PowerManager.PARTIAL_WAKE_LOCK;
 
-public class CMCNotifyKiller extends Service {
-	private static final String TAG = "cmcapp:CMCNotifyKiller";
+public class MusicControlsNotificationKiller extends Service {
+	private static final String TAG = "cmcapp:MusicControlsNotificationKiller";
 
 	private static int NOTIFICATION_ID;
 	private NotificationManager mNM;
@@ -33,17 +35,17 @@ public class CMCNotifyKiller extends Service {
 	private ServiceConnection connection;
 	private boolean bounded;
 
-	public CMCNotifyKiller setActivity(Activity activity) {
+	public MusicControlsNotificationKiller setActivity(Activity activity) {
 		this.activity = activity;
 		return this;
 	}
 
-	public CMCNotifyKiller setConnection(ServiceConnection connection) {
+	public MusicControlsNotificationKiller setConnection(ServiceConnection connection) {
 		this.connection = connection;
 		return this;
 	}
 
-	public CMCNotifyKiller setBounded(boolean bounded) {
+	public MusicControlsNotificationKiller setBounded(boolean bounded) {
 		this.bounded = bounded;
 		return this;
 	}
@@ -117,6 +119,18 @@ public class CMCNotifyKiller extends Service {
 		Log.i(TAG, "onCreate");
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
+	}
+
+	public void setForeground(Notification notification) {
+		this.startForeground(this.NOTIFICATION_ID, notification);
+	}
+
+	public void clearForeground() {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+			return;
+		}
+
+		this.stopForeground(STOP_FOREGROUND_DETACH);
 	}
 
 	/**

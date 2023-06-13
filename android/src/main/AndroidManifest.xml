@@ -3,7 +3,7 @@
       package="com.ingageco.capacitormusiccontrols.capacitormusiccontrolsplugin">
       <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application>
-      <service android:name="com.ingageco.capacitormusiccontrols.CMCNotifyKiller" />
+      <service android:name="com.ingageco.capacitormusiccontrols.MusicControlsNotificationKiller" android:stopWithTask="true" android:foregroundServiceType="mediaPlayback" />
     </application>
   </manifest>
   

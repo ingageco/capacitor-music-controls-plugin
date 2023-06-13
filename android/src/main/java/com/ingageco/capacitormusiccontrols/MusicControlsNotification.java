@@ -30,14 +30,14 @@ public class MusicControlsNotification {
 	private NotificationManager notificationManager;
 	private Notification.Builder notificationBuilder;
 	private int notificationID;
-	private MusicControlsInfos infos;
+	protected MusicControlsInfos infos;
 	private Bitmap bitmapCover;
 	private String CHANNEL_ID;
 
-	public WeakReference<CMCNotifyKiller> killer_service;
+	public WeakReference<MusicControlsNotificationKiller> killer_service;
 
 	// Public Constructor
-	public MusicControlsNotification(Activity cordovaActivity,int id){
+	public MusicControlsNotification(Activity cordovaActivity, int id){
 
 
 		this.CHANNEL_ID ="capacitor-music-channel-id";
@@ -84,10 +84,11 @@ public class MusicControlsNotification {
 			killer_service.get().setNotification(noti);
 		}
 		this.notificationManager.notify(this.notificationID, noti);
+		this.onNotificationUpdated(noti);
 	}
 
-	public void setKillerService(CMCNotifyKiller s) {
-		this.killer_service = new WeakReference<CMCNotifyKiller>(s);
+	public void setKillerService(MusicControlsNotificationKiller s) {
+		this.killer_service = new WeakReference<MusicControlsNotificationKiller>(s);
 	}
 
 	private boolean hasNotification() {
@@ -312,6 +313,10 @@ public class MusicControlsNotification {
 			this.killer_service.get().setNotification(null);
 		}
 		this.notificationManager.cancel(this.notificationID);
+		this.onNotificationDestroyed();
 		Log.i(TAG, "Notification destroyed");
 	}
+
+		protected void onNotificationUpdated(Notification notification) {}
+		protected void onNotificationDestroyed() {}
 }
