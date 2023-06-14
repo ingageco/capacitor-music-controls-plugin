@@ -194,9 +194,8 @@ public class CapacitorMusicControls extends Plugin {
 
 		Intent startServiceIntent = new Intent(activity,MusicControlsNotificationKiller.class);
 		startServiceIntent.putExtra("notificationID", notificationID);
-		activity.bindService(startServiceIntent, newMConnection, Context.BIND_AUTO_CREATE);
+		activity.bindService(startServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
 
-		mConnection = newMConnection;
 	}
 
 
