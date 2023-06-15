@@ -202,12 +202,12 @@ public class CapacitorMusicControls extends Plugin {
 		this.notification = new MusicControlsNotification(activity, this.notificationID, this.token) {
 			@Override
 			protected void onNotificationUpdated(Notification notification) {
-				this.mConnection.setNotification(notification, this.infos.isPlaying);
+				mConnection.setNotification(notification, this.infos.isPlaying);
 			}
 
 			@Override
 			protected void onNotificationDestroyed() {
-				this.mConnection.setNotification(null, false);
+				mConnection.setNotification(null, false);
 			}
 		};
 
@@ -218,7 +218,8 @@ public class CapacitorMusicControls extends Plugin {
 			Intent headsetIntent = new Intent("music-controls-media-button");
 			this.mediaButtonPendingIntent = PendingIntent.getBroadcast(
 				context, 0, headsetIntent, 
-				PendingIntent.FLAG_IMMUTABLE);
+				Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE : PendingIntent.FLAG_UPDATE_CURRENT
+			);
 			this.registerMediaButtonEvent();
 		} catch (Exception e) {
 			this.mediaButtonAccess=false;
