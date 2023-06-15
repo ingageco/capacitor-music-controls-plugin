@@ -1,6 +1,5 @@
 package com.ingageco.capacitormusiccontrols;
 
-import java.lang.ref.WeakReference;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -37,7 +36,6 @@ public class MusicControlsNotification {
 	private String CHANNEL_ID;
 	private Token token;
 
-	public WeakReference<MusicControlsNotificationKiller> killer_service;
 
 	// Public Constructor
 	public MusicControlsNotification(Activity cordovaActivity, int id, Token token){
@@ -53,9 +51,9 @@ public class MusicControlsNotification {
 		// use channelid for Oreo and higher
 		if (Build.VERSION.SDK_INT >= 26) {
 			// The user-visible name of the channel.
-			CharSequence name = "capacitor-music-controls-plugin";
+			CharSequence name = "Audio Controls";
 			// The user-visible description of the channel.
-			String description = "capacitor-music-controls-plugin notification";
+			String description = "Control Playing Audio";
 
 			int importance = NotificationManager.IMPORTANCE_LOW;
 
@@ -84,19 +82,8 @@ public class MusicControlsNotification {
 
 	private void createNotification() {
 		final Notification noti = this.notificationBuilder.build();
-		if (killer_service != null) {
-			killer_service.get().setNotification(noti);
-		}
 		this.notificationManager.notify(this.notificationID, noti);
 		this.onNotificationUpdated(noti);
-	}
-
-	public void setKillerService(MusicControlsNotificationKiller s) {
-		this.killer_service = new WeakReference<MusicControlsNotificationKiller>(s);
-	}
-
-	private boolean hasNotification() {
-		return this.killer_service != null && this.killer_service.get().getNotification() != null;
 	}
 
 	// Toggle the play/pause button
@@ -104,15 +91,9 @@ public class MusicControlsNotification {
 
 		Log.i(TAG, "updateIsPlaying: isPlaying: " + isPlaying);
 
-
-		if (isPlaying == this.infos.isPlaying && this.hasNotification()) {
-			return;  // Not recreate the notification with the same data
-		}
-
 		Log.i(TAG, "updateIsPlaying: pre:this.infos.isPlaying: " + this.infos.isPlaying);
 
 		this.infos.isPlaying=isPlaying;
-
 
 		Log.i(TAG, "updateIsPlaying: post:this.infos.isPlaying: " + this.infos.isPlaying);
 
@@ -122,9 +103,6 @@ public class MusicControlsNotification {
 
 	// Toggle the dismissable status
 	public void updateDismissable(boolean dismissable) {
-		if (dismissable == this.infos.dismissable && hasNotification()) {
-			return;  // Not recreate the notification with the same data
-		}
 		this.infos.dismissable=dismissable;
 		this.createBuilder();
 		this.createNotification();
@@ -313,9 +291,6 @@ public class MusicControlsNotification {
 
 	public void destroy(){
 		Log.i(TAG, "Destroying notification");
-		if (this.killer_service !=null) {
-			this.killer_service.get().setNotification(null);
-		}
 		this.notificationManager.cancel(this.notificationID);
 		this.onNotificationDestroyed();
 		Log.i(TAG, "Notification destroyed");

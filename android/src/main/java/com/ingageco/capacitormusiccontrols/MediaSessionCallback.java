@@ -17,8 +17,6 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
     this.musicControls=musicControls;
   }
 
-
-
   @Override
   public void onPlay() {
     super.onPlay();
