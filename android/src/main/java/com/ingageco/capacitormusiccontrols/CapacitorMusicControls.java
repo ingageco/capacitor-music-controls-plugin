@@ -60,7 +60,7 @@ public class CapacitorMusicControls extends Plugin {
 	private MusicControlsServiceConnection mConnection;
 
 
-	private MediaSessionCallback mMediaSessionCallback = new MediaSessionCallback();
+	private MediaSessionCallback mMediaSessionCallback = new MediaSessionCallback(this);
 
 
 	@PluginMethod()
