@@ -14,6 +14,9 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 
+import android.media.session.MediaSession.Token;
+
+
 import android.util.Log;
 import android.app.Activity;
 
@@ -54,6 +57,9 @@ public class CapacitorMusicControls extends Plugin {
 	private AudioManager mAudioManager;
 	private PendingIntent mediaButtonPendingIntent;
 	private boolean mediaButtonAccess=true;
+	private android.media.session.MediaSession.Token token;
+
+
 	private ServiceConnection mConnection;
 
 
@@ -116,10 +122,6 @@ public class CapacitorMusicControls extends Plugin {
 
 		final Context context=activity.getApplicationContext();
 
-		notification = new MusicControlsNotification(activity, notificationID);
-
-		final MusicControlsNotification my_notification = notification;
-
 
 		// avoid spawning multiple receivers
 		if(mMessageReceiver != null){
@@ -144,6 +146,13 @@ public class CapacitorMusicControls extends Plugin {
 
 		mediaSessionCompat = new MediaSessionCompat(context, "capacitor-music-controls-media-session", null, mediaButtonPendingIntent);
 		mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+
+		MediaSessionCompat.Token _token = mediaSessionCompat.getSessionToken();
+		this.token = (android.media.session.MediaSession.Token) _token.getToken();
+
+		notification = new MusicControlsNotification(activity, notificationID, this.token);
+
+		final MusicControlsNotification my_notification = notification;
 
 		setMediaPlaybackState(PlaybackStateCompat.STATE_PAUSED);
 		mediaSessionCompat.setActive(true);
