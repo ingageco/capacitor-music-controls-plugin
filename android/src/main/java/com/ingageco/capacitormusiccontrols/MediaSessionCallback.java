@@ -23,7 +23,7 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
 
 
     JSObject ret = new JSObject();
-    ret.put("message", "music-controls-media-button-play");
+    ret.put("message", "music-controls-play");
     this.musicControls.controlsNotification(ret);
 
   }
@@ -33,7 +33,7 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
     super.onPause();
 
     JSObject ret = new JSObject();
-    ret.put("message", "music-controls-media-button-pause");
+    ret.put("message", "music-controls-pause");
     this.musicControls.controlsNotification(ret);
 
   }
@@ -43,7 +43,7 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
     super.onSkipToNext();
 
     JSObject ret = new JSObject();
-    ret.put("message", "music-controls-media-button-next");
+    ret.put("message", "music-controls-next");
     this.musicControls.controlsNotification(ret);
 
   }
@@ -53,7 +53,7 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
     super.onSkipToPrevious();
 
     JSObject ret = new JSObject();
-    ret.put("message", "music-controls-media-button-previous");
+    ret.put("message", "music-controls-previous");
     this.musicControls.controlsNotification(ret);
 
   }
@@ -77,49 +77,49 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
       switch (keyCode) {
         case KeyEvent.KEYCODE_MEDIA_PAUSE:
 
-          ret.put("message", "music-controls-media-button-pause");
+          ret.put("message", "music-controls-pause");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_PLAY:
 
-          ret.put("message", "music-controls-media-button-play");
+          ret.put("message", "music-controls-play");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
 
-          ret.put("message", "music-controls-media-button-previous");
+          ret.put("message", "music-controls-previous");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_NEXT:
 
-          ret.put("message", "music-controls-media-button-next");
+          ret.put("message", "music-controls-next");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
 
-          ret.put("message", "music-controls-media-button-play-pause");
+          ret.put("message", "music-controls-toggle-play-pause");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_STOP:
 
-          ret.put("message", "music-controls-media-button-stop");
+          ret.put("message", "music-controls-stop");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
 
-          ret.put("message", "music-controls-media-button-forward");
+          ret.put("message", "music-controls-skip-forward");
           this.musicControls.controlsNotification(ret);
 
           break;
         case KeyEvent.KEYCODE_MEDIA_REWIND:
 
-          ret.put("message", "music-controls-media-button-rewind");
+          ret.put("message", "music-controls-skip-backward");
           this.musicControls.controlsNotification(ret);
 
           break;

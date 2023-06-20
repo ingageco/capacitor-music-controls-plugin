@@ -73,103 +73,84 @@ public class MusicControlsBroadcastReceiver extends BroadcastReceiver {
 					int keyCode = event.getKeyCode();
 					switch (keyCode) {
 						case KeyEvent.KEYCODE_MEDIA_NEXT:
-							ret.put("message", "music-controls-media-button-next");
+							ret.put("message", "music-controls-next");
 							this.musicControls.controlsNotification(ret);
 							break;
 						case KeyEvent.KEYCODE_MEDIA_PAUSE:
-							ret.put("message", "music-controls-media-button-pause");
+							ret.put("message", "music-controls-pause");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-pause\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_PLAY:
-							ret.put("message", "music-controls-media-button-play");
+							ret.put("message", "music-controls-play");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-play\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
-							ret.put("message", "music-controls-media-button-play-pause");
+							ret.put("message", "music-controls-toggle-play-pause");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-play-pause\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
-							ret.put("message", "music-controls-media-button-previous");
+							ret.put("message", "music-controls-previous");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-previous\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_STOP:
-							ret.put("message", "music-controls-media-button-stop");
+							ret.put("message", "music-controls-stop");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-stop\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
-							ret.put("message", "music-controls-media-button-fast-forward");
+							ret.put("message", "music-controls-fast-forward");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-fast-forward\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_REWIND:
-							ret.put("message", "music-controls-media-button-rewind");
+							ret.put("message", "music-controls-rewind");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-rewind\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_SKIP_BACKWARD:
-							ret.put("message", "music-controls-media-button-skip-backward");
+							ret.put("message", "music-controls-skip-backward");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-skip-backward\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_SKIP_FORWARD:
-							ret.put("message", "music-controls-media-button-skip-forward");
+							ret.put("message", "music-controls-skip-forward");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-skip-forward\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_STEP_BACKWARD:
-							ret.put("message", "music-controls-media-button-step-backward");
+							ret.put("message", "music-controls-step-backward");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-step-backward\"}");
 							break;
 						case KeyEvent.KEYCODE_MEDIA_STEP_FORWARD:
-							ret.put("message", "music-controls-media-button-step-forward");
+							ret.put("message", "music-controls-step-forward");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-step-forward\"}");
 							break;
 						case KeyEvent.KEYCODE_META_LEFT:
-							ret.put("message", "music-controls-media-button-meta-left");
+							ret.put("message", "music-controls-meta-left");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-meta-left\"}");
 							break;
 						case KeyEvent.KEYCODE_META_RIGHT:
-							ret.put("message", "music-controls-media-button-meta-right");
+							ret.put("message", "music-controls-meta-right");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-meta-right\"}");
 							break;
 						case KeyEvent.KEYCODE_MUSIC:
-							ret.put("message", "music-controls-media-button-music");
+							ret.put("message", "music-controls-music");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-music\"}");
 							break;
 						case KeyEvent.KEYCODE_VOLUME_UP:
-							ret.put("message", "music-controls-media-button-volume-up");
+							ret.put("message", "music-controls-volume-up");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-volume-up\"}");
 							break;
 						case KeyEvent.KEYCODE_VOLUME_DOWN:
-							ret.put("message", "music-controls-media-button-volume-down");
+							ret.put("message", "music-controls-volume-down");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-volume-down\"}");
 							break;
 						case KeyEvent.KEYCODE_VOLUME_MUTE:
-							ret.put("message", "music-controls-media-button-volume-mute");
+							ret.put("message", "music-controls-volume-mute");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-volume-mute\"}");
 							break;
 						case KeyEvent.KEYCODE_HEADSETHOOK:
-							ret.put("message", "music-controls-media-button-headset-hook");
+							ret.put("message", "music-controls-headset-hook");
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"music-controls-media-button-headset-hook\"}");
 							break;
 						default:
 							ret.put("message", message);
 							this.musicControls.controlsNotification(ret);
-							//this.cb.success("{\"message\": \"" + message + "\"}");
 							break;
 					}
 				}
