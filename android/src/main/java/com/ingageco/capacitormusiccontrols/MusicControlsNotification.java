@@ -233,6 +233,7 @@ public class MusicControlsNotification {
 		int nbControls=0;
 		/* Previous  */
 		if (this.infos.hasPrev){
+			Log.i(TAG, "controls hasPrev");
 			nbControls++;
 			Intent previousIntent = new Intent("music-controls-previous");
 			PendingIntent previousPendingIntent = PendingIntent.getBroadcast(context, 1, previousIntent, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_MUTABLE : 0);
@@ -253,6 +254,7 @@ public class MusicControlsNotification {
 		}
 		/* Next */
 		if (this.infos.hasNext){
+			Log.i(TAG, "controls hasNext");
 			nbControls++;
 			Intent nextIntent = new Intent("music-controls-next");
 			PendingIntent nextPendingIntent = PendingIntent.getBroadcast(context, 1, nextIntent, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_MUTABLE : 0);
@@ -260,6 +262,7 @@ public class MusicControlsNotification {
 		}
 		/* Close */
 		if (this.infos.hasClose){
+			Log.i(TAG, "controls hasClose");
 			nbControls++;
 			Intent destroyIntent = new Intent("music-controls-destroy");
 			PendingIntent destroyPendingIntent = PendingIntent.getBroadcast(context, 1, destroyIntent, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_MUTABLE : 0);
