@@ -39,6 +39,12 @@ public class MusicControlsNotificationKiller extends Service {
 		mNM.cancel(NOTIFICATION_ID);
 	}
 
+	@Override
+	public void onTaskRemoved(Intent intent) {
+		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		mNM.cancel(NOTIFICATION_ID);
+	}
+
 	public void setForeground(Notification notification) {
 		this.startForeground(this.NOTIFICATION_ID, notification);
 	}
