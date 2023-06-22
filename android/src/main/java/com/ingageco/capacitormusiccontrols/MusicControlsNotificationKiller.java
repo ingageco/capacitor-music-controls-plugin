@@ -7,10 +7,11 @@ import android.os.IBinder;
 import android.os.Binder;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.util.Log;
 
 
 public class MusicControlsNotificationKiller extends Service {
-	private static final String TAG = "cmcapp:MusicControlsNotificationKiller";
+	private static final String TAG = "MusicControlsNotificationKiller";
 
 	private static int NOTIFICATION_ID;
 	private NotificationManager mNM;
@@ -35,17 +36,24 @@ public class MusicControlsNotificationKiller extends Service {
 
 	@Override
 	public void onDestroy() {
+		Log.i(TAG, "onDestroy");
+
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
 	}
 
 	@Override
 	public void onTaskRemoved(Intent intent) {
+		Log.i(TAG, "onTaskRemoved");
+
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
 	}
 
 	public void setForeground(Notification notification) {
+
+		Log.i(TAG, "setForeground");
+
 		this.startForeground(this.NOTIFICATION_ID, notification);
 	}
 
@@ -53,6 +61,8 @@ public class MusicControlsNotificationKiller extends Service {
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
 			return;
 		}
+
+		Log.i(TAG, "clearForeground");
 
 		this.stopForeground(STOP_FOREGROUND_DETACH);
 	}
