@@ -25,11 +25,15 @@ public class MusicControlsNotificationKiller extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.i(TAG, "onStartCommand");
+
 		return Service.START_STICKY;
 	}
 
 	@Override
 	public void onCreate() {
+		Log.i(TAG, "onCreate");
+
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
 	}

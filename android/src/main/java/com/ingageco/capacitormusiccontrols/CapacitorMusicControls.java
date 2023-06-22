@@ -249,6 +249,19 @@ public class CapacitorMusicControls extends Plugin {
 		call.resolve();
 	}
 
+
+	protected void handleOnDestroy() {
+
+		final Activity activity = getActivity();
+		final Context context = activity.getApplicationContext();
+
+		this.destroyPlayerNotification();
+		this.stopMessageReceiver(context);
+		this.unregisterMediaButtonEvent();
+		this.stopServiceConnection(activity);
+
+	}
+
 	public void stopMessageReceiver(Context context){
 
 		this.mMessageReceiver.stopListening();
