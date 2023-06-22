@@ -5,10 +5,13 @@ An update to Cordova Music Controls plugin to support Capacitor V3
 If you are looking to support Capacitor V2:
 https://github.com/ingageco/capacitor-music-controls-plugin
 
-## Update Credit
+## 1.1.0 Update - Temporary changes to listening for control events
 
-All credit to JumBay for doing the leg work in a fork to get this working on Capacitor 3. 
-https://github.com/wako-app/capacitor-music-controls-plugin
+As of June 2023, Capacitor 4 has a bug on Android 13 notifying the plugin of native events via notifyListeners. See this issue: https://github.com/ionic-team/capacitor/issues/6234
+
+In order to move forward, we changed from using notifyListeners to using triggerJSEvent, which works. This means that in order to correctly listen for events, the listener is created differently on Android than iOS. The player position is also not currently sent with the Android event. 
+
+As soon as the bug with notifyListeners is fixed, we will update and revert back to using notifyListeners on Android on a new minor version.
 
 ## About
 
@@ -18,8 +21,6 @@ This plugin is forked from the original Cordova plugin which is no longer mainta
 https://github.com/homerours/cordova-music-controls-plugin
 
 ##  work in progress
-
-this integration is a work in progress. currently, most controls work as expected. there are some questions around supplying images on iOS.
 
 PRs for rounding out issues and improving the plugin are welcome.
 
@@ -122,11 +123,23 @@ CapacitorMusicControls.updateIsPlaying({
 - Listen for events and pass them to your handler function
 
 ```javascript
+
+// IOS
 CapacitorMusicControls.addListener('controlsNotification', (info: any) => {
     console.log('controlsNotification was fired');
     console.log(info);
     handleControlsEvent(info);
 });
+
+
+// ANDROID (13, see bug above as to why it's necessary)
+document.addEventListener('controlsNotification', (event) => {
+  console.log('controlsNotification was fired');
+  console.log(event);
+  const info = { message : event.message, position: 0 };
+  handleControlsEvent(info);
+});
+
 ```
 
 
@@ -189,14 +202,22 @@ handleControlsEvent(action){
 }
 ```
 
+## Thank yous
+
+This plugin would not be functional or up-to-date without the great testing, debugging, and reporting of NorthFred (https://github.com/northfred)
+
 ## credits & contributions
 
 Original plugin by:
 homerours (https://github.com/homerours)
 
-Documentation influenced by:
+This plugin has integrated much of the changes from the ghenry22 Cordova plugin.
 ghenry22 (https://github.com/ghenry22)
 ghenry22 successor to Cordova Music Controls (https://github.com/ghenry22/cordova-plugin-music-controls2/)
+
+JumBay did much of the leg work in a fork to get this working on Capacitor 3. 
+jumbay (https://github.com/jumbay)
+https://github.com/wako-app/capacitor-music-controls-plugin
 
 Special thanks to some forks with changes: 
 trabdin (https://github.com/trabdin)
