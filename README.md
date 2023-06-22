@@ -39,17 +39,9 @@ PRs for rounding out issues and improving the plugin are welcome.
 Run:
 npx cap sync ios
 
-## Android (thanks @lbesiche)
+## Android
 
-After you install the plugin, locate your MainActivity.java (can be found in /android/app/src/main/java/path/to/my/app/MainActivity.java)
-
-import this path:
-import com.ingageco.capacitormusiccontrols.CapacitorMusicControls;
-
-add class inside bridge activity:
-add(CapacitorMusicControls.class);
-
-Finally, run:
+Run:
 npx cap sync android
 
 ## Importing the Plugin
