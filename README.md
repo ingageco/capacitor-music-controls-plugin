@@ -1,4 +1,4 @@
-# Capacitor 3 Music Controls Plugin
+# Capacitor Music Controls Plugin
 
 An update to Cordova Music Controls plugin to support Capacitor 3+
 
