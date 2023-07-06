@@ -264,17 +264,22 @@ public class CapacitorMusicControls extends Plugin {
 
 	public void stopMessageReceiver(Context context){
 
-		this.mMessageReceiver.stopListening();
+		if(this.mMessageReceiver != null){
 
-		try{
+			this.mMessageReceiver.stopListening();
 
-			context.unregisterReceiver(this.mMessageReceiver);
+			try{
 
-		} catch(IllegalArgumentException e) {
+				context.unregisterReceiver(this.mMessageReceiver);
 
-			e.printStackTrace();
+			} catch(IllegalArgumentException e) {
+
+				e.printStackTrace();
+
+			}
 
 		}
+
 		
 	}
 
