@@ -8,6 +8,9 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import android.os.Build;
+
+
 public class MusicControlsServiceConnection implements ServiceConnection {
     private static final String TAG = "MusicControlsServiceConnection";
 
@@ -23,7 +26,13 @@ public class MusicControlsServiceConnection implements ServiceConnection {
         Log.i(TAG, "onServiceConnected");
 
         this.service = ((KillBinder) binder).service;
-        this.service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
+       // this.service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.service.startForegroundService(new Intent(activity, MusicControlsNotificationKiller.class));
+        } else {
+            this.service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
+        }
     }
 
     public void onServiceDisconnected(ComponentName className) {
