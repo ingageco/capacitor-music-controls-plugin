@@ -175,7 +175,7 @@ public class MusicControlsNotification {
 
 		//Configure builder
 		builder.setContentTitle(this.infos.track);
-		if (!this.infos.artist.isEmpty()){
+		if (this.infos.artist != null){
 			builder.setContentText(this.infos.artist);
 		}
 		

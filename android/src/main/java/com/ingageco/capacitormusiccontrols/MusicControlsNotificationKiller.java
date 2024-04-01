@@ -34,6 +34,8 @@ public class MusicControlsNotificationKiller extends Service {
 	public void onCreate() {
 		Log.i(TAG, "onCreate");
 
+		// this.startForeground();
+
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
 	}
