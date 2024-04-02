@@ -5,9 +5,11 @@ An update to Cordova Music Controls plugin to support Capacitor 3+
 If you are looking to support Capacitor V2:
 https://github.com/ingageco/capacitor-music-controls-plugin-for-capacitor-2
 
-## 2.0.0 Update - Plugin Renamed
+## 2.0.0 Update - Plugin Renamed, versioning changed
 
 As of April 2024, the current version of the plugin was renamed from `capacitor-music-controls-plugin-v3` to `capacitor-music-controls-plugin`. The old plugin, that only supported below Capacitor 3, was renamed to `capacitor-music-controls-plugin-for-capacitor-2`. This was done in hopes to avoid future confusion over the version names, and make this current repository easier to find.
+
+I have also bumped the version to version 5, to hopefully stay alongside Capacitor's version.
 
 ## 1.1.0 Update - Temporary changes to listening for control events
 
