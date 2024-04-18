@@ -109,7 +109,7 @@ CapacitorMusicControls.create({
 - Update whether the music is playing true/false, as well as the time elapsed (seconds)
 
 ```javascript
-CapacitorMusicControls.updateIsPlaying({
+CapacitorMusicControls.updateElapsed({
   isPlaying: true, // affects Android only
   elapsed: timeElapsed, // affects iOS Only
 })
@@ -171,7 +171,7 @@ handleControlsEvent(action){
 		case 'music-controls-toggle-play-pause' :
 			// do something
 			break;
-		case 'music-controls-skip-to':
+		case 'music-controls-seek-to':
 			// do something
 			break;
 		case 'music-controls-skip-forward':
