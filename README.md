@@ -132,7 +132,7 @@ CapacitorMusicControls.addListener("controlsNotification", (info: any) => {
 });
 
 // ANDROID (13, see bug above as to why it's necessary)
-document.addEventListener("controlsNotification", (event) => {
+document.addEventListener("controlsNotification", (event:any) => {
   console.log("controlsNotification was fired");
   console.log(event);
   const info = { message: event.message, position: 0 };
