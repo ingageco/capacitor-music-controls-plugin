@@ -214,7 +214,7 @@ public class CapacitorMusicControls extends Plugin {
 
 		// Register media (headset) button event receiver
 		try {
-			this.mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+			this.mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 			Intent headsetIntent = new Intent("music-controls-media-button");
 			this.mediaButtonPendingIntent = PendingIntent.getBroadcast(
 				context, 0, headsetIntent, 
