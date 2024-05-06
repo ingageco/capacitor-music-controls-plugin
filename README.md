@@ -109,7 +109,7 @@ CapacitorMusicControls.create({
 - Update whether the music is playing true/false, as well as the time elapsed (seconds)
 
 ```javascript
-CapacitorMusicControls.updateIsPlaying({
+CapacitorMusicControls.updateElapsed({
   isPlaying: true, // affects Android only
   elapsed: timeElapsed, // affects iOS Only
 })
@@ -132,7 +132,7 @@ CapacitorMusicControls.addListener("controlsNotification", (info: any) => {
 });
 
 // ANDROID (13, see bug above as to why it's necessary)
-document.addEventListener("controlsNotification", (event) => {
+document.addEventListener("controlsNotification", (event:any) => {
   console.log("controlsNotification was fired");
   console.log(event);
   const info = { message: event.message, position: 0 };
@@ -171,7 +171,7 @@ handleControlsEvent(action){
 		case 'music-controls-toggle-play-pause' :
 			// do something
 			break;
-		case 'music-controls-skip-to':
+		case 'music-controls-seek-to':
 			// do something
 			break;
 		case 'music-controls-skip-forward':
