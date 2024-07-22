@@ -56,5 +56,5 @@ export interface CapacitorMusicControlsPlugin {
      * @param dismissable {boolean}
      */
     updateDismissable(dismissable: boolean): void;
-    addListener(event: string, callback: (info: any) => void): PluginListenerHandle;
+    addListener(event: string, callback: (info: any) => void): Promise<PluginListenerHandle>;
 }

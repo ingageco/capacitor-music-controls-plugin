@@ -1,4 +1,4 @@
-import { Plugin, PluginListenerHandle } from "@capacitor/core";
+import { PluginListenerHandle } from "@capacitor/core";
 
 export interface CapacitorMusicControlsInfo {
     track?: string;
