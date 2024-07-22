@@ -5,6 +5,20 @@
   <application>
     <service android:name="com.ingageco.capacitormusiccontrols.MusicControlsNotificationKiller"
       android:stopWithTask="true" android:foregroundServiceType="mediaPlayback" />
+    <receiver
+      android:name=".MusicControlsBroadcastReceiver"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="music-controls-previous" />
+        <action android:name="music-controls-pause" />
+        <action android:name="music-controls-play" />
+        <action android:name="music-controls-next" />
+        <action android:name="music-controls-media-button" />
+        <action android:name="music-controls-destroy" />
+        <action android:name="android.intent.action.HEADSET_PLUG" />
+        <action android:name="android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>
   

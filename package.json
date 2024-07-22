@@ -1,6 +1,6 @@
 {
   "name": "capacitor-music-controls-plugin",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "Implementation of MusicControls for Capacitor 3+ projects",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -13,13 +13,13 @@
   "author": "Ingage",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "^5.0.0"
+    "@capacitor/core": "^6.0.0"
   },
   "devDependencies": {
     "typescript": "^4.3.2",
-    "@capacitor/android": "^5.0.0",
-    "@capacitor/cli": "^5.0.0",
-    "@capacitor/ios": "^5.0.0"
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/ios": "^6.0.0"
   },
   "files": [
     "dist/",

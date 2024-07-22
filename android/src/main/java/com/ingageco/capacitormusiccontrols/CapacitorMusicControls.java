@@ -115,19 +115,18 @@ public class CapacitorMusicControls extends Plugin {
 
 
 	private void registerBroadcaster(MusicControlsBroadcastReceiver mMessageReceiver){
-		final Context context = getActivity().getApplicationContext();
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-previous"), ContextCompat.RECEIVER_NOT_EXPORTED);
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-pause"), ContextCompat.RECEIVER_NOT_EXPORTED);
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-play"), ContextCompat.RECEIVER_NOT_EXPORTED);
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-next"), ContextCompat.RECEIVER_NOT_EXPORTED);
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-media-button"), ContextCompat.RECEIVER_NOT_EXPORTED);
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-destroy"), ContextCompat.RECEIVER_NOT_EXPORTED);
+    final Context context = getActivity().getApplicationContext();
+    IntentFilter filter = new IntentFilter();
+    filter.addAction("music-controls-previous");
+    filter.addAction("music-controls-pause");
+    filter.addAction("music-controls-play");
+    filter.addAction("music-controls-next");
+    filter.addAction("music-controls-media-button");
+    filter.addAction("music-controls-destroy");
+    filter.addAction(Intent.ACTION_HEADSET_PLUG);
+    filter.addAction(android.bluetooth.BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
 
-		// Listen for headset plug/unplug
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG), ContextCompat.RECEIVER_NOT_EXPORTED);
-
-			// Listen for bluetooth connection state changes
-		ContextCompat.registerReceiver(context, (BroadcastReceiver)mMessageReceiver, new IntentFilter(android.bluetooth.BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED), ContextCompat.RECEIVER_NOT_EXPORTED);
+    ContextCompat.registerReceiver(context, mMessageReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 	}
 
 	// Register pendingIntent for broacast
@@ -266,20 +265,14 @@ public class CapacitorMusicControls extends Plugin {
 	public void stopMessageReceiver(Context context){
 
 		if(this.mMessageReceiver != null){
-
-			this.mMessageReceiver.stopListening();
-
-			try{
-
-				context.unregisterReceiver(this.mMessageReceiver);
-
-			} catch(IllegalArgumentException e) {
-
-				e.printStackTrace();
-
-			}
-
-		}
+        this.mMessageReceiver.stopListening();
+        try{
+            context.unregisterReceiver(this.mMessageReceiver);
+        } catch(IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        this.mMessageReceiver = null;
+    }
 
 		
 	}

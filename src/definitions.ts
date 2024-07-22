@@ -1,4 +1,4 @@
-import { PluginListenerHandle } from "@capacitor/core";
+import { Plugin, PluginListenerHandle } from "@capacitor/core";
 
 export interface CapacitorMusicControlsInfo {
     track?: string;
@@ -63,5 +63,5 @@ export interface CapacitorMusicControlsPlugin {
      */
     updateDismissable(dismissable: boolean): void;
 
-    addListener(event: string, callback: (info: any) => void): PluginListenerHandle
+    addListener(event: string, callback: (info: any) => void): Promise<PluginListenerHandle>
 }
