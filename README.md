@@ -200,7 +200,10 @@ handleControlsEvent(action){
 
 ## Thank yous
 
-This plugin would not be functional or up-to-date without the great testing, debugging, and reporting of NorthFred (https://github.com/northfred)
+Thank you to the following people for helping keep this plugin tested and up-to-date via feedback and changes:
+
+NorthFred (https://github.com/northfred)
+heffthedev (https://github.com/heffthedev)
 
 ## credits & contributions
 
