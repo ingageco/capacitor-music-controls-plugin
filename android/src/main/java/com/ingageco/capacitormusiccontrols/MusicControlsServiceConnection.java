@@ -26,11 +26,8 @@ public class MusicControlsServiceConnection implements ServiceConnection {
         Log.i(TAG, "onServiceConnected");
 
         this.service = ((KillBinder) binder).service;
-       // this.service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            this.service.startForegroundService(new Intent(activity, MusicControlsNotificationKiller.class));
-        } else {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             this.service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
         }
     }
@@ -48,7 +45,7 @@ public class MusicControlsServiceConnection implements ServiceConnection {
         Log.i(TAG, "setNotification");
 
         if (isPlaying) {
-            this.service.setForeground(notification);
+            this.service.setForeground(notification, this.activity);
         } else {
             this.service.clearForeground();
         }
