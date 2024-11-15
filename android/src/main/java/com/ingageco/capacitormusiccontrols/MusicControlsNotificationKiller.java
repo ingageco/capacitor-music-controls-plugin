@@ -1,5 +1,6 @@
 package com.ingageco.capacitormusiccontrols;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.Service;
 import android.os.Build;
@@ -9,13 +10,13 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.util.Log;
 
-
 public class MusicControlsNotificationKiller extends Service {
 	private static final String TAG = "MusicControlsNotificationKiller";
 
 	private static int NOTIFICATION_ID;
 	private NotificationManager mNM;
 	private final IBinder mBinder = new KillBinder(this);
+	private boolean isRunning = false;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -46,6 +47,7 @@ public class MusicControlsNotificationKiller extends Service {
 
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
+		this.isRunning = false;
 	}
 
 	@Override
@@ -56,9 +58,15 @@ public class MusicControlsNotificationKiller extends Service {
 		mNM.cancel(NOTIFICATION_ID);
 	}
 
-	public void setForeground(Notification notification) {
+	public void setForeground(Notification notification, Activity activity) {
 
 		Log.i(TAG, "setForeground");
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !this.isRunning) {
+            Log.i(TAG, "startForegroundService");
+            this.isRunning = true;
+            this.startForegroundService(new Intent(activity, MusicControlsNotificationKiller.class));
+        }
 
 		this.startForeground(this.NOTIFICATION_ID, notification);
 	}
