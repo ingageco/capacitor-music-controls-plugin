@@ -1,6 +1,6 @@
 {
   "name": "capacitor-music-controls-plugin",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "description": "Implementation of MusicControls for Capacitor 3+ projects",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
