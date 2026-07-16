@@ -1,33 +1,27 @@
 {
   "name": "Capacitor",
-  "version": "3.9.0",
+  "version": "7.6.8",
   "summary": "Capacitor for iOS",
-  "social_media_url": "https://twitter.com/capacitorjs",
   "license": "MIT",
   "homepage": "https://capacitorjs.com/",
   "platforms": {
-    "ios": "12.0"
+    "ios": "14.0"
   },
   "authors": {
     "Ionic Team": "hi@ionicframework.com"
   },
   "source": {
     "git": "https://github.com/ionic-team/capacitor.git",
-    "branch": "portals-dev"
+    "tag": "7.6.8"
   },
-  "source_files": [
-    "Capacitor/Capacitor/*.{swift,h,m}",
-    "Capacitor/Capacitor/Plugins/*.{swift,h,m}",
-    "Capacitor/Capacitor/Plugins/**/*.{swift,h,m}"
-  ],
+  "source_files": "Capacitor/Capacitor/**/*.{swift,h,m}",
   "module_map": "Capacitor/Capacitor/Capacitor.modulemap",
   "resources": [
-    "Capacitor/Capacitor/assets/native-bridge.js"
+    "Capacitor/Capacitor/assets/native-bridge.js",
+    "Capacitor/Capacitor/PrivacyInfo.xcprivacy"
   ],
   "dependencies": {
-    "CapacitorCordova": [
-
-    ]
+    "CapacitorCordova": []
   },
   "swift_versions": "5.1",
   "swift_version": "5.1"

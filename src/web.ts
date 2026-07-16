@@ -3,13 +3,6 @@ import { WebPlugin } from '@capacitor/core';
 import { CapacitorMusicControlsInfo, CapacitorMusicControlsPlugin } from ".";
 
 export class CapacitorMusicControlsWeb extends WebPlugin implements CapacitorMusicControlsPlugin {
-    constructor() {
-        super({
-            name: 'CapacitorMusicControls',
-            platforms: ['web'],
-        });
-    }
-
     create(options: CapacitorMusicControlsInfo): Promise<any> {
         console.log('create', options);
         return Promise.resolve(undefined);

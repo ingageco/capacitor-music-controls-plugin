@@ -1,7 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 import { CapacitorMusicControlsInfo, CapacitorMusicControlsPlugin } from ".";
 export declare class CapacitorMusicControlsWeb extends WebPlugin implements CapacitorMusicControlsPlugin {
-    constructor();
     create(options: CapacitorMusicControlsInfo): Promise<any>;
     destroy(): Promise<any>;
     updateDismissable(dismissable: boolean): void;
