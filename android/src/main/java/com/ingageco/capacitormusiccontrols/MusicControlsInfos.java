@@ -23,10 +23,14 @@ public class MusicControlsInfos{
 	public String nextIcon;
 	public String closeIcon;
 	public String notificationIcon;
+	// milliseconds; the JS API takes seconds, matching iOS
+	public long duration;
+	public long elapsed;
+	public boolean hasScrubbing;
 
 	public MusicControlsInfos(JSObject args) throws JSONException {
 		final JSObject params = args;
-		
+
 		this.track = params.getString("track");
 		this.artist = params.getString("artist");
 		this.album = params.getString("album");
@@ -43,6 +47,9 @@ public class MusicControlsInfos{
 		this.nextIcon = params.getString("nextIcon");
 		this.closeIcon = params.getString("closeIcon");
 		this.notificationIcon = params.getString("notificationIcon");
+		this.duration = (long) (params.optDouble("duration", 0) * 1000);
+		this.elapsed = (long) (params.optDouble("elapsed", 0) * 1000);
+		this.hasScrubbing = params.optBoolean("hasScrubbing", false);
 	}
 
 }

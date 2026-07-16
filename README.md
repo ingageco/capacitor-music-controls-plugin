@@ -75,14 +75,16 @@ CapacitorMusicControls.create({
   hasNext: false, // show next button, optional, default: true
   hasClose: true, // show close button, optional, default: false
 
+  // all optional
+  duration: 60, // seconds, default: 0. On Android this drives the notification progress bar.
+  elapsed: 10, // seconds, default: 0
+  hasScrubbing: false, // default: false. Enable seeking from the control center / notification progress bar
+
   // iOS only, all optional
-  duration: 60, // default: 0
-  elapsed: 10, // default: 0
   hasSkipForward: true, // default: false. true value overrides hasNext.
   hasSkipBackward: true, // default: false. true value overrides hasPrev.
   skipForwardInterval: 15, // default: 15.
   skipBackwardInterval: 15, // default: 15.
-  hasScrubbing: false, // default: false. Enable scrubbing from control center progress bar
 
   // Android only, all optional
   isPlaying: true, // default : true
@@ -109,9 +111,9 @@ CapacitorMusicControls.create({
 - Update whether the music is playing true/false, as well as the time elapsed (seconds)
 
 ```javascript
-CapacitorMusicControls.updateIsPlaying({
-  isPlaying: true, // affects Android only
-  elapsed: timeElapsed, // affects iOS Only
+CapacitorMusicControls.updateElapsed({
+  isPlaying: true,
+  elapsed: timeElapsed, // seconds
 })
   .then(() => {
     // SUCCESS
@@ -135,7 +137,7 @@ CapacitorMusicControls.addListener("controlsNotification", (info: any) => {
 document.addEventListener("controlsNotification", (event) => {
   console.log("controlsNotification was fired");
   console.log(event);
-  const info = { message: event.message, position: 0 };
+  const info = { message: event.message, position: event.position || 0 };
   handleControlsEvent(info);
 });
 ```
@@ -165,6 +167,12 @@ handleControlsEvent(action){
 			break;
 		case 'music-controls-destroy':
 			// controls were destroyed
+			break;
+
+		case 'music-controls-seek-to':
+			// action.position is the target position in seconds
+			// e.g. myAudio.currentTime = action.position;
+			// then call updateElapsed({ elapsed: action.position, isPlaying: true })
 			break;
 
 		// External controls (iOS only)

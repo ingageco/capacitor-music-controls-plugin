@@ -59,6 +59,19 @@ public class MediaSessionCallback extends MediaSessionCompat.Callback {
   }
 
   @Override
+  public void onSeekTo(long pos) {
+    super.onSeekTo(pos);
+
+    this.musicControls.seekTo(pos);
+
+    // position is reported in seconds, matching the iOS seek event
+    JSObject ret = new JSObject();
+    ret.put("message", "music-controls-seek-to");
+    ret.put("position", pos / 1000.0);
+    this.musicControls.controlsNotification(ret);
+  }
+
+  @Override
   public void onPlayFromMediaId(String mediaId, Bundle extras) {
     super.onPlayFromMediaId(mediaId, extras);
   }

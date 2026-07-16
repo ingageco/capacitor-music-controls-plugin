@@ -59,6 +59,9 @@ public class CapacitorMusicControls extends Plugin {
 	private boolean mediaButtonAccess=true;
 	private android.media.session.MediaSession.Token token;
 	private MusicControlsServiceConnection mConnection;
+	private long elapsedMs = 0;
+	private int lastPlaybackState = PlaybackStateCompat.STATE_PAUSED;
+	private boolean hasScrubbing = false;
 
 
 	private MediaSessionCallback mMediaSessionCallback = new MediaSessionCallback(this);
@@ -96,7 +99,14 @@ public class CapacitorMusicControls extends Plugin {
 
 				}
 
+				// duration (ms) must be in the session metadata for the
+				// notification to render a progress bar
+				metadataBuilder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, infos.duration);
+
 				mediaSessionCompat.setMetadata(metadataBuilder.build());
+
+				this.elapsedMs = infos.elapsed;
+				this.hasScrubbing = infos.hasScrubbing;
 
 				if(infos.isPlaying)
 					setMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING);
@@ -318,6 +328,8 @@ public class CapacitorMusicControls extends Plugin {
 		// final JSONObject params = args.getJSONObject(0);
 		try{
 			final boolean isPlaying = params.getBoolean("isPlaying");
+			// seconds, matching iOS; keep the previous position if not supplied
+			this.elapsedMs = (long) (params.optDouble("elapsed", this.elapsedMs / 1000.0) * 1000);
 			this.notification.updateIsPlaying(isPlaying);
 
 			if(isPlaying)
@@ -356,18 +368,29 @@ public class CapacitorMusicControls extends Plugin {
 
   }
 
+	// called from the media session when the user scrubs the notification
+	// progress bar; positionMs is reported back to JS in seconds like iOS
+	public void seekTo(long positionMs) {
+		this.elapsedMs = positionMs;
+		setMediaPlaybackState(this.lastPlaybackState);
+	}
+
 	private void setMediaPlaybackState(int state) {
+		this.lastPlaybackState = state;
 		PlaybackStateCompat.Builder playbackstateBuilder = new PlaybackStateCompat.Builder();
+		long actions = PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+				PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID |
+				PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH;
+		// like iOS, only allow dragging the progress bar when scrubbing is enabled
+		if (this.hasScrubbing) {
+			actions |= PlaybackStateCompat.ACTION_SEEK_TO;
+		}
 		if( state == PlaybackStateCompat.STATE_PLAYING ) {
-			playbackstateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PAUSE | PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
-					PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID |
-					PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH);
-			playbackstateBuilder.setState(state, PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 1.0f);
+			playbackstateBuilder.setActions(actions | PlaybackStateCompat.ACTION_PAUSE);
+			playbackstateBuilder.setState(state, this.elapsedMs, 1.0f);
 		} else {
-			playbackstateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PLAY | PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
-					PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID |
-					PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH);
-			playbackstateBuilder.setState(state, PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 0);
+			playbackstateBuilder.setActions(actions | PlaybackStateCompat.ACTION_PLAY);
+			playbackstateBuilder.setState(state, this.elapsedMs, 0);
 		}
 		this.mediaSessionCompat.setPlaybackState(playbackstateBuilder.build());
 	}
