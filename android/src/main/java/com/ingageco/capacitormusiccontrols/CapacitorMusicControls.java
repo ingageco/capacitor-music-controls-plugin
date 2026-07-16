@@ -177,6 +177,18 @@ public class CapacitorMusicControls extends Plugin {
 
 		final Context context=activity.getApplicationContext();
 
+		// avoid leaking the previous binding when create() is called again;
+		// a service with live bindings ignores stopService(), which left the
+		// notification alive after destroy()
+		if (this.mConnection != null) {
+			try {
+				activity.unbindService(this.mConnection);
+			} catch(IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			this.mConnection = null;
+		}
+
 		final MusicControlsServiceConnection mConnection = new MusicControlsServiceConnection(activity);
 		this.mConnection = mConnection;
 
@@ -294,7 +306,11 @@ public class CapacitorMusicControls extends Plugin {
 	public void stopServiceConnection(Activity activity){
 		if (this.mConnection != null) {
 			Intent stopServiceIntent = new Intent(activity, MusicControlsNotificationKiller.class);
-			activity.unbindService(this.mConnection);
+			try {
+				activity.unbindService(this.mConnection);
+			} catch(IllegalArgumentException e) {
+				e.printStackTrace();
+			}
 			activity.stopService(stopServiceIntent);
 			this.mConnection = null;
 		}

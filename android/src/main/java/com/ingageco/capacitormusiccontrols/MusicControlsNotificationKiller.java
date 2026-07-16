@@ -45,6 +45,9 @@ public class MusicControlsNotificationKiller extends Service {
 	public void onDestroy() {
 		Log.i(TAG, "onDestroy");
 
+		// make sure the notification cannot outlive the service, even if it
+		// was previously detached via STOP_FOREGROUND_DETACH
+		this.stopForeground(STOP_FOREGROUND_REMOVE);
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNM.cancel(NOTIFICATION_ID);
 		this.isRunning = false;
