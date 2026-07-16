@@ -40,9 +40,12 @@ public class CapacitorMusicControls: CAPPlugin {
           print(optionLine)
         }
 
-        if(!self.eventListnerActive){
-            self.registerMusicControlsEventListener();
+        // re-register on every create so command availability (hasNext,
+        // hasPrev, hasScrubbing, ...) reflects the latest options
+        if(self.eventListnerActive){
+            self.deregisterMusicControlsEventListener();
         }
+        self.registerMusicControlsEventListener();
 
         var nowPlayingInfo = [String: Any]()
     

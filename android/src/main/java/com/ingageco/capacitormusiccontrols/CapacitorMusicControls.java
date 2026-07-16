@@ -62,6 +62,8 @@ public class CapacitorMusicControls extends Plugin {
 	private long elapsedMs = 0;
 	private int lastPlaybackState = PlaybackStateCompat.STATE_PAUSED;
 	private boolean hasScrubbing = false;
+	private boolean hasPrev = true;
+	private boolean hasNext = true;
 
 
 	private MediaSessionCallback mMediaSessionCallback = new MediaSessionCallback(this);
@@ -107,6 +109,8 @@ public class CapacitorMusicControls extends Plugin {
 
 				this.elapsedMs = infos.elapsed;
 				this.hasScrubbing = infos.hasScrubbing;
+				this.hasPrev = infos.hasPrev;
+				this.hasNext = infos.hasNext;
 
 				if(infos.isPlaying)
 					setMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING);
@@ -378,10 +382,18 @@ public class CapacitorMusicControls extends Plugin {
 	private void setMediaPlaybackState(int state) {
 		this.lastPlaybackState = state;
 		PlaybackStateCompat.Builder playbackstateBuilder = new PlaybackStateCompat.Builder();
-		long actions = PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+		long actions = PlaybackStateCompat.ACTION_PLAY_PAUSE |
 				PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID |
 				PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH;
-		// like iOS, only allow dragging the progress bar when scrubbing is enabled
+		// Android 13+ builds the notification buttons from these actions, so
+		// hasPrev/hasNext/hasScrubbing must gate them here as well as in the
+		// notification layout
+		if (this.hasNext) {
+			actions |= PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
+		}
+		if (this.hasPrev) {
+			actions |= PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS;
+		}
 		if (this.hasScrubbing) {
 			actions |= PlaybackStateCompat.ACTION_SEEK_TO;
 		}
