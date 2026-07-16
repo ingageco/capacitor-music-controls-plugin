@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@capacitor/android@^7.0.0":
-  version "7.6.8"
-  resolved "https://registry.npmjs.org/@capacitor/android/-/android-7.6.8.tgz"
-  integrity sha512-N5LXe1ls+TA0mq+RhtyDdP1JISzAAI+OuLGL3G7OWQxfQQOZYkiEjEJMYqMV6JR421IqpRsYj08JOfC0PFC3NA==
+"@capacitor/android@^8.0.0":
+  version "8.4.2"
+  resolved "https://registry.npmjs.org/@capacitor/android/-/android-8.4.2.tgz"
+  integrity sha512-bzf8XZ9C+ePgOQ+e+T0fnhHGH4aCNY494vvSQIF5w4AY07RwEmkFqZs1678DDSMH0hLSQpxEwXGFNUVcXO6bBA==
 
-"@capacitor/cli@^7.0.0":
-  version "7.6.8"
-  resolved "https://registry.npmjs.org/@capacitor/cli/-/cli-7.6.8.tgz"
-  integrity sha512-sJYLoSS1wVHjDPwRc0grtNZcQZnkQc7TJKoVZdHL2HI5TPCq+27WBrMAo0mXvQQSH2axPYCz5cyRrcqqakOvxQ==
+"@capacitor/cli@^8.0.0":
+  version "8.4.2"
+  resolved "https://registry.npmjs.org/@capacitor/cli/-/cli-8.4.2.tgz"
+  integrity sha512-hE4HmpMdr5T8eQ++kGa1BKkdG2JLEvo1y1cj1kmFK78VB9dBp538oe1EZvzwupNGOl0ZueALotzL5wcXRD9w1Q==
   dependencies:
     "@ionic/cli-framework-output" "^2.2.8"
     "@ionic/utils-subprocess" "^3.0.1"
@@ -30,17 +30,17 @@
     tslib "^2.8.1"
     xml2js "^0.6.2"
 
-"@capacitor/core@^7.0.0", "@capacitor/core@^7.6.0":
-  version "7.6.8"
-  resolved "https://registry.npmjs.org/@capacitor/core/-/core-7.6.8.tgz"
-  integrity sha512-x1xfxvNcTSnj6OoYaAB0n0a0HRvi5f2YjcVnMLxpMhbHDgGDAzzN9z8cnPCYV+SKTvqGF1hezHm82Op32XaAGg==
+"@capacitor/core@^8.0.0", "@capacitor/core@^8.4.0":
+  version "8.4.2"
+  resolved "https://registry.npmjs.org/@capacitor/core/-/core-8.4.2.tgz"
+  integrity sha512-fQPRb3JXRaU2pnufDUvqOjhsrYxDQeFRZyaj/sHydIUxD2NxOGHKMpmKUdI+U4OOmKuGZyvRpi7TSJU+7Bjbmg==
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/ios@^7.0.0":
-  version "7.6.8"
-  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-7.6.8.tgz"
-  integrity sha512-TAM1FdI1Cfl8e/wLBo7x5m61V/J1fMEpyxU2psZzHzsa436k2pwEME6CQoBRYdw6Q6gud0jZSPwOVrNn+MI7Ag==
+"@capacitor/ios@^8.0.0":
+  version "8.4.2"
+  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-8.4.2.tgz"
+  integrity sha512-ClVzIjK++yRjsRPOpdEzhsZfbHfoEc0f4M6vD0v7sWh0qcoF6NkxNAeHpWTn4OPJpJfpGGoYsq+IfEHrYyBiWA==
 
 "@ionic/cli-framework-output@^2.2.8":
   version "2.2.8"
@@ -576,10 +576,10 @@ tslib@^2.0.1, tslib@^2.1.0, tslib@^2.6.2, tslib@^2.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
-typescript@^4.3.2:
-  version "4.9.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.4.tgz"
-  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
+typescript@^5.9.3:
+  version "5.9.3"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz"
+  integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
 
 universalify@^2.0.0:
   version "2.0.0"

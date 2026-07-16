@@ -11,6 +11,7 @@
     "noUnusedParameters": true,
     "outDir": "dist/esm",
     "pretty": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "es2017"
